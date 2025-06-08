@@ -1,3 +1,3 @@
-from .fed_server import APP as app
+from .fed_server import app
 @app.get("/")
 def root(): return {"hello": "mcp-fed"}
