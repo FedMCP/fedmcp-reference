@@ -8,8 +8,10 @@ logs = boto3.client('logs') if LOG_GROUP else None
 
 from jwcrypto import jwk, jws
 from presidio_analyzer import AnalyzerEngine
+from presidio_analyzer.nlp_engine import SpacyNlpEngine
 APP = FastAPI(title="MCP-Fed Reference")
-analyzer = AnalyzerEngine()
+nlp_engine = SpacyNlpEngine(model_name='en_core_web_sm')
+from presidio_analyzer.nlp_engine import SpacyNlpEngine
 _KEY = jwk.JWK.generate(kty='EC', crv='P-256')
 
 def _sign(p):
