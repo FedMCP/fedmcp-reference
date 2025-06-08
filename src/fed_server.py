@@ -17,6 +17,21 @@ from presidio_analyzer.nlp_engine import SpacyNlpEngine
 from jwcrypto import jwk, jws
 from presidio_analyzer.nlp_engine import SpacyNlpEngine
 from presidio_analyzer import AnalyzerEngine
+from functools import lru_cache
+
+
+
+@lru_cache
+
+def get_analyzer():
+
+    from presidio_analyzer import AnalyzerEngine
+
+    from presidio_analyzer.nlp_engine import SpacyNlpEngine
+
+    nlp_engine = SpacyNlpEngine({"lang_code": "en", "model_name": "en_core_web_sm"})
+
+    return AnalyzerEngine(nlp_engine=nlp_engine, supported_languages=["en"])
 from presidio_analyzer.nlp_engine import SpacyNlpEngine
 nlp_engine = SpacyNlpEngine({'lang_code': 'en', 'model_name': 'en_core_web_sm'})
 APP = FastAPI(title="MCP-Fed Reference")
@@ -32,7 +47,7 @@ def _sign(p):
 @APP.middleware("http")
 async def audit_mw(req: Request, call_next):
     body = await req.body()
-    pii = bool(analyzer.analyze(body.decode(), language='en'))
+    pii = bool(get_analyzer().analyze(body.decode(), language='en'))
     resp = await call_next(req)
     audit = {"ts": datetime.utcnow().isoformat(),
              "path": req.url.path,
