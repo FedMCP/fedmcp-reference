@@ -22,16 +22,13 @@ from functools import lru_cache
 
 
 @lru_cache
-
 def get_analyzer():
-
+    """Return a cached Presidio AnalyzerEngine using spaCy small model."""
     from presidio_analyzer import AnalyzerEngine
-
     from presidio_analyzer.nlp_engine import SpacyNlpEngine
-
-    model_cfg={"en": {"model_name": "en_core_web_sm"}}
+    model_cfg = {"en": {"model_name": "en_core_web_sm"}}
     nlp_engine = SpacyNlpEngine(model_cfg)
-
+    return AnalyzerEngine(nlp_engine=nlp_engine, supported_languages=["en"])
     return AnalyzerEngine(nlp_engine=nlp_engine, supported_languages=["en"])
 from presidio_analyzer.nlp_engine import SpacyNlpEngine
     model_cfg={"en": {"model_name": "en_core_web_sm"}}
