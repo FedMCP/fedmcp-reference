@@ -1,6 +1,11 @@
 from fastapi import FastAPI, Request
 from datetime import datetime
 import hashlib, json
+import os, boto3
+LOG_GROUP = os.getenv('AUDIT_LOG_GROUP')
+LOG_STREAM = os.getenv('AUDIT_LOG_STREAM', 'primary')
+logs = boto3.client('logs') if LOG_GROUP else None
+
 from jwcrypto import jwk, jws
 from presidio_analyzer import AnalyzerEngine
 APP = FastAPI(title="MCP-Fed Reference")
@@ -23,4 +28,9 @@ async def audit_mw(req: Request, call_next):
              "pii": pii,
              "sig": _sign({})}
     print(json.dumps(audit))
+    if logs:
+        logs.put_log_events(logGroupName=LOG_GROUP,
+                            logStreamName=LOG_STREAM,
+                            logEvents=[{"timestamp": int(datetime.utcnow().timestamp()*1000),
+                                         "message": json.dumps(audit)}])
     return resp
