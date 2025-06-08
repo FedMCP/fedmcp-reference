@@ -1,7 +1,7 @@
 from datetime import datetime
 import hashlib, json, os
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request, Response, Response
 from presidio_analyzer.nlp_engine import SpacyNlpEngine
 from jwcrypto import jwk, jws
 from presidio_analyzer import AnalyzerEngine
@@ -33,7 +33,7 @@ def get_analyzer():
             }],
         )
 
-    response: Response = await call_next(request)
+    response: Response = response: Response = await call_next(request)
     response.headers["X-Content-SHA256"] = signed
     return response
 @app.get("/health", tags=["internal"])
