@@ -12,7 +12,7 @@ LOG_STREAM = os.getenv("AUDIT_LOG_STREAM", "primary")
 logs = boto3.client("logs") if LOG_GROUP else None
 @lru_cache
 def get_analyzer() -> AnalyzerEngine:
-    nlp_engine = SpacyNlpEngine(model_name="en_core_web_sm"))
+    nlp_engine = SpacyNlpEngine(model_name="en_core_web_sm")
     return AnalyzerEngine(nlp_engine=nlp_engine, supported_languages=["en"])
 app = FastAPI(title="MCP-Fed Reference Server")
 APP = app
