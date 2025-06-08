@@ -29,14 +29,18 @@ def get_analyzer():
 
     from presidio_analyzer.nlp_engine import SpacyNlpEngine
 
-    nlp_engine = SpacyNlpEngine({"lang_code": "en", "model_name": "en_core_web_sm"})
+    model_cfg={"en": {"model_name": "en_core_web_sm"}}
+    nlp_engine = SpacyNlpEngine(model_cfg)
 
     return AnalyzerEngine(nlp_engine=nlp_engine, supported_languages=["en"])
 from presidio_analyzer.nlp_engine import SpacyNlpEngine
-nlp_engine = SpacyNlpEngine({'lang_code': 'en', 'model_name': 'en_core_web_sm'})
+    model_cfg={"en": {"model_name": "en_core_web_sm"}}
+    nlp_engine = SpacyNlpEngine(model_cfg)
 APP = FastAPI(title="MCP-Fed Reference")
-nlp_engine = SpacyNlpEngine({'lang_code': 'en', 'model_name': 'en_core_web_sm'})
-nlp_engine = SpacyNlpEngine({'lang_code': 'en', 'model_name': 'en_core_web_sm'})
+    model_cfg={"en": {"model_name": "en_core_web_sm"}}
+    nlp_engine = SpacyNlpEngine(model_cfg)
+    model_cfg={"en": {"model_name": "en_core_web_sm"}}
+    nlp_engine = SpacyNlpEngine(model_cfg)
 _KEY = jwk.JWK.generate(kty='EC', crv='P-256')
 
 def _sign(p):
