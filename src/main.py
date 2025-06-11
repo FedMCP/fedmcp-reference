@@ -1,3 +1,3 @@
 from .fed_server import app
 @app.get("/")
-def root(): return {"hello": "mcp-fed"}
+def root(): return {"hello": "fedmcp"}
