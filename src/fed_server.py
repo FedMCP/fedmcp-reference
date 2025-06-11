@@ -1,5 +1,5 @@
 
-"""Light‑weight FastAPI reference server for MCP‑Fed demo."""
+"""Light‑weight FastAPI reference server for FedMCP demo."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ from presidio_analyzer.nlp_engine import SpacyNlpEngine
 #  FastAPI app
 # --------------------------------------------------------------------------- #
 
-app = FastAPI(title="MCP‑Fed reference server")
+app = FastAPI(title="FedMCP reference server")
 
 # --------------------------------------------------------------------------- #
 #  Presidio analyzer — cached to avoid model reload on every request
