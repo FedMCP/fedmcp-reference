@@ -1,0 +1,25 @@
+
+
+[tool.poetry]
+name = "fedmcp-reference"
+version = "0.1.0"
+description = "Reference signer/validator SDK & CLI for FedMCP"
+authors = ["Peregrine LLC"]
+packages = [
+  { include = "fedmcp" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+jwcrypto = "^1.5.4"   # JSON Web Signature / Encryption utilities
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+typer = { version = "^0.12.3", extras = ["all"] }
+
+[tool.poetry.scripts]
+fedmcp = "fedmcp.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
